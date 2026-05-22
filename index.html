@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Anime Universe | Explore the Cosmos of Anime</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Global decorative glowing background elements -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <!-- Header Section -->
+  <header>
+    <div class="header-container">
+      <div class="logo">
+        <i class="fa-solid fa-circle-nodes logo-icon"></i>
+        <span>Anime Universe</span>
+      </div>
+      
+      <div class="search-wrapper">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="search" placeholder="Search across the cosmos of anime...">
+        <button id="clear-search" class="clear-btn" aria-label="Clear Search"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <nav>
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <span class="hero-badge"><i class="fa-solid fa-meteor"></i> Multiverse Database</span>
+      <h1>🌌 Anime Universe Gallery</h1>
+      <p>Embark on a visual journey through the greatest animated sagas of all time. Search, filter, rate, and review your favorites.</p>
+      
+      <!-- Anime Quote Widget -->
+      <div class="quote-container">
+        <div id="quote-widget" class="quote-card">
+          <p class="quote-text">"If you don't take risks, you can't create a future!"</p>
+          <span class="quote-author">— Monkey D. Luffy (One Piece)</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Controls Panel (Genre Filters & Stats) -->
+  <div class="controls-panel">
+    <div class="genre-filters" id="genre-filters">
+      <button class="genre-btn active" data-genre="all">All Genres</button>
+      <button class="genre-btn" data-genre="Action">Action</button>
+      <button class="genre-btn" data-genre="Adventure">Adventure</button>
+      <button class="genre-btn" data-genre="Fantasy">Fantasy</button>
+      <button class="genre-btn" data-genre="Shonen">Shonen</button>
+      <button class="genre-btn" data-genre="Sci-Fi">Sci-Fi</button>
+    </div>
+    
+    <div class="stats-panel">
+      <button id="favorites-toggle" class="fav-toggle-btn" title="Show Favorites Only">
+        <i class="fa-solid fa-heart"></i>
+        <span>Favorites</span>
+        <span id="fav-count" class="badge">0</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Active Filter Notification -->
+  <div id="active-filter-feedback" class="filter-feedback" style="display: none;">
+    <span>Filtering by: <strong id="filter-display-text"></strong></span>
+    <button id="reset-filters" class="reset-link">Reset filters</button>
+  </div>
+
+  <!-- Main Gallery Grid -->
+  <main class="main-container">
+    <section id="gallery"></section>
+    
+    <!-- No Results State -->
+    <div id="no-results" class="no-results-panel" style="display: none;">
+      <i class="fa-regular fa-compass no-results-icon"></i>
+      <h3>Lost in Space</h3>
+      <p>No anime found matching your query. Try searching for something else or clearing the filters.</p>
+      <button id="clear-filters-btn" class="action-btn">Clear All Filters</button>
+    </div>
+  </main>
+
+  <!-- Detail Modal -->
+  <div id="detail-modal" class="modal-overlay">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="modal-close" aria-label="Close details">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      
+      <div class="modal-body">
+        <!-- Banner Showcase -->
+        <div class="modal-banner-section">
+          <div class="modal-banner-glow"></div>
+          <img id="modal-banner" src="" alt="Anime Banner" class="modal-banner-img">
+          <div class="modal-title-overlay">
+            <h2 id="modal-title">Anime Title</h2>
+            <div class="modal-badges">
+              <span id="modal-studio" class="modal-badge-item">Studio</span>
+              <span id="modal-episodes" class="modal-badge-item">Episodes</span>
+              <span id="modal-score" class="modal-badge-item"><i class="fa-solid fa-star"></i> Score</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-content-section">
+          <div class="modal-details-grid">
+            <!-- Left Info Column -->
+            <div class="modal-info-left">
+              <h3>Synopsis</h3>
+              <p id="modal-synopsis">This is the synopsis of the anime series...</p>
+              
+              <h3>Key Genres</h3>
+              <div id="modal-genres" class="card-tags"></div>
+              
+              <h3>Visual Gallery</h3>
+              <div class="modal-images-gallery" id="modal-gallery-images">
+                <!-- Loaded dynamically -->
+              </div>
+            </div>
+
+            <!-- Right Reviews Column -->
+            <div class="modal-info-right">
+              <h3>Cosmic Feedback</h3>
+              
+              <!-- Review Form -->
+              <form id="review-form" class="review-form">
+                <h4>Share Your Review</h4>
+                <div class="rating-input-wrapper">
+                  <span>Rating:</span>
+                  <div class="star-rating-select" id="star-select">
+                    <button type="button" class="star-btn" data-value="1"><i class="fa-regular fa-star"></i></button>
+                    <button type="button" class="star-btn" data-value="2"><i class="fa-regular fa-star"></i></button>
+                    <button type="button" class="star-btn" data-value="3"><i class="fa-regular fa-star"></i></button>
+                    <button type="button" class="star-btn" data-value="4"><i class="fa-regular fa-star"></i></button>
+                    <button type="button" class="star-btn" data-value="5"><i class="fa-regular fa-star"></i></button>
+                  </div>
+                  <input type="hidden" id="review-rating-value" value="0">
+                </div>
+                <div class="input-group">
+                  <textarea id="review-text" placeholder="Write your review here... Be respectful of spoilers!" required></textarea>
+                </div>
+                <button type="submit" class="submit-review-btn">Submit Review</button>
+              </form>
+
+              <!-- Reviews List -->
+              <div class="reviews-list-container">
+                <h4>User Reviews</h4>
+                <div id="reviews-list" class="reviews-list"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer Section -->
+  <footer>
+    <div class="footer-container">
+      <div class="footer-brand">
+        <i class="fa-solid fa-circle-nodes logo-icon"></i>
+        <span>Anime Universe</span>
+      </div>
+      <p class="footer-credits">© 2026 Anime Universe. Journey through the animated dimensions.</p>
+      <div class="footer-socials">
+        <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+        <a href="#" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+        <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
